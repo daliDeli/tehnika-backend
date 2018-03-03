@@ -24,19 +24,19 @@ var Storage = multer.diskStorage({
 });
 var upload = multer({ storage: Storage }).array("files", 3);
 
-//  var db = mysql.createConnection({
-//   host: "localhost",
-//   user: "carsijat_user",
-//   password: "dado_carsija_123",
-//   database: "carsijat_db"
-// });
+ var db = mysql.createConnection({
+  host: "5.9.14.30",
+  user: "carsijat_user",
+  password: "dado_carsija_123",
+  database: "carsijat_db"
+});
 
-var db = mysql.createConnection({
-   host: "localhost",
-   user: "dalibor",
-   password: "dado",
-   database: "tehnikatestdb"
- });
+// var db = mysql.createConnection({
+//    host: "localhost",
+//    user: "dalibor",
+//    password: "dado",
+//    database: "tehnikatestdb"
+//  });
 
 // var db = mysql.createConnection({
 //     host: "localhost",
@@ -138,7 +138,7 @@ app.post('/api/fileupload', (req, res) => {
 });
 
 // kreira kategoriju
-app.post('/api/cateogroy/create', (req, res) => {
+app.post('/api/category/create', (req, res) => {
    db.query(`insert into kategorije (naziv, slug) values ('${req.body.naziv}', '${slug(req.body.naziv)}')`,
    (error, rows, fields) => {
        if(error){
@@ -217,11 +217,6 @@ app.put('/api/category/update', (req, res) => {
            return res.end('success');
        });
 });
-
-// var server = app.listen(3300, listening);
-// function listening(){
-//     console.log("listening...")
-// }
 
 //Heroku promjene 1. dynamic port binding
 const PORT = process.env.PORT || 3300;
